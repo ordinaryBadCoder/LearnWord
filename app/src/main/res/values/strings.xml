@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">FirstApp</string>
+    <string name="correct_answer">correct answer</string>
+    <string name="continue_button">Continue</string>
+    <string name="correct_text">Correct!</string>
+    <string name="skip_button">SKIP</string>
+    <string name="wrong_text">Wrong!</string>
+</resources>

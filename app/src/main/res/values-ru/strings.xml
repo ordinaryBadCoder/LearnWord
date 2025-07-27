@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FirstApp</string>
+    <string name="correct_answer">Верный ответ</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="correct_text">Верно!</string>
+    <string name="skip_button">Пропустить</string>
+    <string name="wrong_text">Неверно!</string>
+</resources>
