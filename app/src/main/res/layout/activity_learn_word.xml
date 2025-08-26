@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/ibClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -33,7 +33,7 @@
         android:fontFamily="@font/nunito_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        app:layout_constraintTop_toBottomOf="@+id/ibClose" />
     <!--Панель с вариантами ответов-->
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -78,6 +78,7 @@
         </LinearLayout>
         <!--Вариант ответа 2-->
         <LinearLayout
+            android:id="@id/layoutAnswer2"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="18dp"
@@ -86,6 +87,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvVariantNumber2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
@@ -98,7 +100,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tvSecondAnswer"
+                android:id="@+id/tvVariantValue2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -139,6 +141,7 @@
 
         <!--Вариант ответа 4-->
         <LinearLayout
+            android:id="@+id/layoutAnswer4"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="18dp"
@@ -147,6 +150,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvVariantNumber4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
@@ -159,7 +163,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/FourthAnswer"
+                android:id="@+id/tvVariantValue4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

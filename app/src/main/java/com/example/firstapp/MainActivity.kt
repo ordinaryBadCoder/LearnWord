@@ -2,6 +2,7 @@ package com.example.firstapp
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,83 +26,97 @@ class MainActivity : AppCompatActivity() {
 
         //Нажатие на корректный ответ
         binding.layoutAnswer3.setOnClickListener {
-            markAnswerCorrect()
+            markAnswerCorrect(
+                binding.layoutAnswer3,
+                binding.tvVariantNumber3,
+                binding.tvVariantValue3
+            )
         }
 
         //Нажатие на некорректный ответ
         binding.layoutAnswer1.setOnClickListener {
-            markAnswerWrong()
+            markAnswerWrong(
+                binding.layoutAnswer1,
+                binding.tvVariantNumber1,
+                binding.tvVariantValue1
+            )
         }
 
         //Нейтральный
         binding.btnContinue.setOnClickListener {
-            markAnswerNeutral()
+            markAnswerNeutral(
+                binding.layoutAnswer3,
+                binding.tvVariantNumber3,
+                binding.tvVariantValue3
+            )
+            markAnswerNeutral(
+                binding.layoutAnswer1,
+                binding.tvVariantNumber1,
+                binding.tvVariantValue1
+            )
         }
     }
 
     //Нейтральный
-    private fun markAnswerNeutral() {
-
-        with(binding){
-            for (layout in listOf(layoutAnswer1, layoutAnswer3)){
-                layout.background = ContextCompat.getDrawable(
-                    this@MainActivity,
-                    R.drawable.shape_rounded_containers
+    private fun markAnswerNeutral(
+        layoutAnswer: LinearLayout,
+        tvVariantNumber: TextView,
+        tvVariantValue: TextView,
+    ) {
+        layoutAnswer.background = ContextCompat.getDrawable(
+                this@MainActivity,
+                R.drawable.shape_rounded_containers
                 )
-            }
 
-            for (textView in listOf(tvVariantValue1, tvVariantValue3)){
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        this@MainActivity,
-                        R.color.textVariantsColor
-                    ))
-            }
+        tvVariantNumber.setTextColor(
+            ContextCompat.getColor(
+                this@MainActivity,
+                R.color.textVariantsColor
+            )
+        )
 
-            for (textView in listOf(tvVariantNumber1, tvVariantNumber3)){
-                textView.apply{
-
-                    background = ContextCompat.getDrawable(
-                        this@MainActivity,
-                        R.drawable.shape_rounded_variants
-                    )
-
-                    setTextColor(ContextCompat.getColor(
-                        this@MainActivity,
-                        R.color.textVariantsColor
-                    ))
-                }
-            }
-
-            layoutResult.isVisible = false
-            btnSkip.isVisible = true
-
+        //Замена нескольких характеристик объекта через apply
+        tvVariantValue.apply{
+            background = ContextCompat.getDrawable(
+                this@MainActivity,
+                R.drawable.shape_rounded_variants
+            )
+            setTextColor(ContextCompat.getColor(
+                this@MainActivity,
+                R.color.textVariantsColor
+            ))
         }
 
     }
 
     //Некорректный ответ
-    private fun markAnswerWrong() {
+    private fun markAnswerWrong(
+        layoutAnswer: LinearLayout,
+        tvVariantNumber: TextView,
+        tvVariantValue: TextView,
+    ) {
+
+
 
         //Новая обводка для контейнера
-        binding.layoutAnswer1.background = ContextCompat.getDrawable(
+        layoutAnswer.background = ContextCompat.getDrawable(
             this@MainActivity,
             R.drawable.shape_rounded_containers_wrong
         )
         //Новый фон для цифры
-        binding.tvVariantNumber1.background = ContextCompat.getDrawable(
+        tvVariantNumber.background = ContextCompat.getDrawable(
             this@MainActivity,
             R.drawable.shape_rounded_variants_wrong
         )
         //Новый цвет для цифры
-        binding.tvVariantNumber1.setTextColor(
+        tvVariantNumber.setTextColor(
             ContextCompat.getColor(
                 this@MainActivity,
                 R.color.white
             )
         )
         //Новый цвет для ответа
-        binding.tvVariantValue1.setTextColor(
+        tvVariantValue.setTextColor(
             ContextCompat.getColor(
                 this@MainActivity,
                 R.color.wrongAnswerColor
@@ -138,26 +153,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Корректный ответ
-    private fun markAnswerCorrect() {
+    private fun markAnswerCorrect(
+        layoutAnswer: LinearLayout,
+        tvVariantNumber: TextView,
+        tvVariantValue: TextView,
+    ) {
         //Новая обводка для контейнера
-        binding.layoutAnswer3.background = ContextCompat.getDrawable(
+        layoutAnswer.background = ContextCompat.getDrawable(
             this@MainActivity,
             R.drawable.shape_rounded_containers_correct
         )
         //Новый фон для цифры
-        binding.tvVariantNumber3.background = ContextCompat.getDrawable(
+        tvVariantNumber.background = ContextCompat.getDrawable(
             this@MainActivity,
             R.drawable.shape_rounded_variants_correct
         )
         //Новый цвет для цифры
-        binding.tvVariantNumber3.setTextColor(
+        tvVariantNumber.setTextColor(
             ContextCompat.getColor(
                 this@MainActivity,
                 R.color.white
             )
         )
         //Новый цвет для ответа
-        binding.tvVariantValue3.setTextColor(
+        tvVariantValue.setTextColor(
             ContextCompat.getColor(
                 this@MainActivity,
                 R.color.correctAnswerColor
