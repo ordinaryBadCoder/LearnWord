@@ -20,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--Панель с вариантами ответов-->
     <TextView
         android:id="@+id/tvQuestionWord"
         android:layout_width="wrap_content"
@@ -28,16 +29,17 @@
         android:layout_marginTop="96dp"
         android:width="311dp"
         android:height="68dp"
+        android:fontFamily="@font/nunito_bold"
         android:gravity="center"
+        android:singleLine="true"
         android:text="Galaxy"
         android:textSize="50sp"
-        android:fontFamily="@font/nunito_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ibClose" />
-    <!--Панель с вариантами ответов-->
+
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/layoutVariants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -74,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:width="235dp"
-                android:text="Сломать"
+                android:text=" "
                 style="@style/TextViewVariantsStyle" />
         </LinearLayout>
         <!--Вариант ответа 2-->
@@ -106,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:width="235dp"
-                android:text="Сон"
+                android:text=" "
                 style="@style/TextViewVariantsStyle" />
         </LinearLayout>
         <!--Вариант ответа 3-->
@@ -136,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:width="235dp"
-                android:text="Галактика"
+                android:text=" "
                 style="@style/TextViewVariantsStyle" />
         </LinearLayout>
 
@@ -169,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:width="235dp"
-                android:text="Утюг"
+                android:text=" "
                 style="@style/TextViewVariantsStyle" />
         </LinearLayout>
     </LinearLayout>
@@ -200,7 +202,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/layoutVariants"
         tools:layout_height="136dp">
         <ImageView
             android:id="@+id/ivResultIcon"

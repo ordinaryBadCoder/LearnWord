@@ -1,5 +1,6 @@
 package com.example.firstapp
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -8,6 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.example.firstapp.classes.LearnWordsTrainer
+import com.example.firstapp.classes.NUMBER_OF_ANSWERS
+import com.example.firstapp.classes.Question
 import com.example.firstapp.databinding.ActivityLearnWordBinding
 import com.example.firstapp.databinding.ActivityMainBinding
 
@@ -24,36 +28,93 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityLearnWordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Нажатие на корректный ответ
-        binding.layoutAnswer3.setOnClickListener {
-            markAnswerCorrect(
-                binding.layoutAnswer3,
-                binding.tvVariantNumber3,
-                binding.tvVariantValue3
-            )
+        val trainer = LearnWordsTrainer()
+        showNextQuestion(trainer)
+
+        with(binding){
+            btnContinue.setOnClickListener {
+                layoutResult.isVisible = false
+
+                markAnswerNeutral(layoutAnswer1, tvVariantNumber1, tvVariantValue1)
+                markAnswerNeutral(layoutAnswer2, tvVariantNumber2, tvVariantValue2)
+                markAnswerNeutral(layoutAnswer3, tvVariantNumber3, tvVariantValue3)
+                markAnswerNeutral(layoutAnswer4, tvVariantNumber4, tvVariantValue4)
+
+                showNextQuestion(trainer)
+            }
+
+            btnSkip.setOnClickListener {
+                showNextQuestion(trainer)
+            }
         }
 
-        //Нажатие на некорректный ответ
-        binding.layoutAnswer1.setOnClickListener {
-            markAnswerWrong(
-                binding.layoutAnswer1,
-                binding.tvVariantNumber1,
-                binding.tvVariantValue1
-            )
-        }
+    }
 
-        //Нейтральный
-        binding.btnContinue.setOnClickListener {
-            markAnswerNeutral(
-                binding.layoutAnswer3,
-                binding.tvVariantNumber3,
-                binding.tvVariantValue3
-            )
-            markAnswerNeutral(
-                binding.layoutAnswer1,
-                binding.tvVariantNumber1,
-                binding.tvVariantValue1
-            )
+
+    private fun showNextQuestion(trainer: LearnWordsTrainer) {
+        val firstQuestion: Question? = trainer.getNextQuestion()
+
+        with(binding){
+            //если список вариантов равен null или содержит меньше вариантов, чем требуется - завершаем обучение
+            if (firstQuestion == null || firstQuestion.variants.size < NUMBER_OF_ANSWERS){
+                tvQuestionWord.isVisible = false
+                layoutVariants.isVisible = false
+                btnSkip.isVisible = true
+                btnSkip.text = "Complete"
+            } else {
+                btnSkip.isVisible = true
+                tvQuestionWord.isVisible = true
+                tvQuestionWord.text = firstQuestion.correctAnswer.original
+
+                tvVariantValue1.text = firstQuestion.variants[0].translate
+                tvVariantValue2.text = firstQuestion.variants[1].translate
+                tvVariantValue3.text = firstQuestion.variants[2].translate
+                tvVariantValue4.text = firstQuestion.variants[3].translate
+
+                layoutAnswer1.setOnClickListener {
+                    if (trainer.checkAnswer(0)){
+                        markAnswerCorrect(layoutAnswer1, tvVariantNumber1, tvVariantValue1)
+                        showResultMessage(true)
+                    } else {
+                        markAnswerWrong(layoutAnswer1, tvVariantNumber1, tvVariantValue1)
+                        showResultMessage(false)
+                    }
+                }
+
+                layoutAnswer2.setOnClickListener {
+                    if (trainer.checkAnswer(1)){
+                        markAnswerCorrect(layoutAnswer2, tvVariantNumber2, tvVariantValue2)
+                        showResultMessage(true)
+                    } else {
+                        markAnswerWrong(layoutAnswer2, tvVariantNumber2, tvVariantValue2)
+                        showResultMessage(false)
+                    }
+                }
+
+                layoutAnswer3.setOnClickListener {
+                    if (trainer.checkAnswer(2)){
+                        markAnswerCorrect(layoutAnswer3, tvVariantNumber3, tvVariantValue3)
+                        showResultMessage(true)
+                    } else {
+                        markAnswerWrong(layoutAnswer3, tvVariantNumber3, tvVariantValue3)
+                        showResultMessage(false)
+                    }
+                }
+
+                layoutAnswer4.setOnClickListener {
+                    if (trainer.checkAnswer(3)){
+                        markAnswerCorrect(layoutAnswer4, tvVariantNumber4, tvVariantValue4)
+                        showResultMessage(true)
+                    } else {
+                        markAnswerWrong(layoutAnswer4, tvVariantNumber4, tvVariantValue4)
+                        showResultMessage(false)
+                    }
+                }
+
+
+
+
+            }
         }
     }
 
@@ -68,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.shape_rounded_containers
                 )
 
-        tvVariantNumber.setTextColor(
+        tvVariantValue.setTextColor(
             ContextCompat.getColor(
                 this@MainActivity,
                 R.color.textVariantsColor
@@ -76,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         //Замена нескольких характеристик объекта через apply
-        tvVariantValue.apply{
+        tvVariantNumber.apply{
             background = ContextCompat.getDrawable(
                 this@MainActivity,
                 R.drawable.shape_rounded_variants
@@ -208,5 +269,43 @@ class MainActivity : AppCompatActivity() {
         )
         //Отображение панели верного ответа
         binding.layoutResult.isVisible = true
+    }
+
+    private fun showResultMessage(
+        isCorrect: Boolean
+    ){
+        var color: Int
+        var messageText: String
+        var resultIconResource: Int
+
+        if(isCorrect){
+            color = ContextCompat.getColor(
+                this,
+                R.color.correctAnswerColor)
+
+            resultIconResource = R.drawable.ic_correct
+
+            messageText = "Correct!"
+        } else {
+            color = ContextCompat.getColor(
+                this,
+                R.color.wrongAnswerColor
+            )
+
+            resultIconResource = R.drawable.ic_wrong
+
+            messageText = "Wrong!"
+        }
+
+        with(binding){
+            btnSkip.isVisible = false
+            layoutResult.isVisible = true
+            btnContinue.setTextColor(color)
+            layoutResult.setBackgroundColor(color)
+            tvResultMessage.text = messageText
+            ivResultIcon.setImageResource(resultIconResource)
+
+        }
+
     }
 }
