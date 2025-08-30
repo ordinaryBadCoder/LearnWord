@@ -1,7 +1,5 @@
 package com.example.firstapp.classes
 
-import kotlin.random.Random
-
 const val NUMBER_OF_ANSWERS: Int = 4
 
 class LearnWordsTrainer  {

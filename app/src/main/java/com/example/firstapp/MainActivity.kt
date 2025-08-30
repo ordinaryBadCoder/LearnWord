@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                 showNextQuestion(trainer)
             }
         }
-
     }
 
 
@@ -110,10 +109,6 @@ class MainActivity : AppCompatActivity() {
                         showResultMessage(false)
                     }
                 }
-
-
-
-
             }
         }
     }
@@ -156,8 +151,6 @@ class MainActivity : AppCompatActivity() {
         tvVariantNumber: TextView,
         tvVariantValue: TextView,
     ) {
-
-
 
         //Новая обводка для контейнера
         layoutAnswer.background = ContextCompat.getDrawable(
